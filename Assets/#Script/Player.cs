@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5.0f;
-    [SerializeField] private Vector2 inputVector;
+    public Vector2 inputVector;
     private Rigidbody2D playerRigidbody;
     private SpriteRenderer playerSpriteRender;
     private Animator playerAnimator;
