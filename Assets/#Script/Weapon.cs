@@ -9,6 +9,13 @@ public class Weapon : MonoBehaviour
     public float damage;
     public int count;
     public float speed;
+    float timer;
+    Player player;
+
+    private void Awake()
+    {
+        player = GetComponentInParent<Player>();
+    }
 
     private void Start()
     {
@@ -24,13 +31,21 @@ public class Weapon : MonoBehaviour
                 break;
 
             default:
+                timer += Time.deltaTime;
+
+                if (timer > speed)
+                {
+                    timer = 0;
+                    Fire();
+
+                }
                 break;
         }
 
         // Test 
-        if(Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump"))
         {
-            LevelUp(30, 10);
+            LevelUp(10, 10);
         }
     }
 
@@ -53,6 +68,7 @@ public class Weapon : MonoBehaviour
                 break;
 
             default:
+                speed = 0.3f;
                 break;
         }
     }
@@ -62,14 +78,14 @@ public class Weapon : MonoBehaviour
         for (int index = 0; index < count; index++)
         {
             Transform bullet;
-            if(index < transform.childCount)
+            if (index < transform.childCount)
             {
                 bullet = transform.GetChild(index); // 기존꺼가 있으면 그걸 사용 
             }
-            else 
+            else
             {
-               bullet = GameManager.instance.poolManager.Get(prefabId).transform;
-               bullet.parent = transform;
+                bullet = GameManager.instance.poolManager.Get(prefabId).transform;
+                bullet.parent = transform;
             }
             bullet.parent = transform;
             bullet.localPosition = Vector3.zero;
@@ -78,7 +94,21 @@ public class Weapon : MonoBehaviour
             Vector3 rotVector = Vector3.forward * 360 * index / count;
             bullet.Rotate(rotVector);
             bullet.Translate(bullet.up * 1.5f, Space.World);
-            bullet.GetComponent<Bullet>().Init(damage, -1); // -1 is Infinity Per 무한 관통 공격 
+            bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero); // -1 is Infinity Per 무한 관통 공격 
         }
+    }
+
+    void Fire()
+    {
+        if (player.scanner.nearestTarget == null)
+            return;
+
+        Vector3 targetPos = player.scanner.nearestTarget.position;
+        Vector3 dir = targetPos - transform.position;
+        dir = dir.normalized; // 크기를 1로 변환 
+        Transform bullet = GameManager.instance.poolManager.Get(prefabId).transform;
+        bullet.position = transform.position;
+        bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+        bullet.GetComponent<Bullet>().Init(damage, count, dir);
     }
 }

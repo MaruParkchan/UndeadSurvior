@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5.0f;
     public Vector2 inputVector;
+    public Scanner scanner;
     private Rigidbody2D playerRigidbody;
     private SpriteRenderer playerSpriteRender;
     private Animator playerAnimator;
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerSpriteRender = GetComponent<SpriteRenderer>();
         playerAnimator = GetComponent<Animator>();
+        scanner = GetComponent<Scanner>();
     }
 
     private void FixedUpdate()
