@@ -8,8 +8,20 @@ public class GameManager : MonoBehaviour
     public PoolManager poolManager;
     public Player player;
 
+    public float gameTime;
+    public float maxGameTIme = 2 * 10f;
+
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Update()
+    {
+        gameTime += Time.deltaTime;
+        if(gameTime > maxGameTIme)
+        {
+            gameTime = maxGameTIme;
+        }
     }
 }
