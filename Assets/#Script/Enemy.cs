@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -51,7 +52,29 @@ public class Enemy : MonoBehaviour
         enemyAnimator.runtimeAnimatorController = animatorCon[spawnData.spriteType];
         health = spawnData.health;
         maxHealth = spawnData.health;
-        speed = spawnData.speed;     
+        speed = spawnData.speed;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.CompareTag("Bullet"))
+            return;
+
+        health -= other.GetComponent<Bullet>().damage;
+
+        if(health > 0)
+        {
+            // 
+        }
+        else
+        {
+            Dead();
+        }
+    }
+
+    void Dead()
+    {
+        gameObject.SetActive(false);
     }
 
 }
