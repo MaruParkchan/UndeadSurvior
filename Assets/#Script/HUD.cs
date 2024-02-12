@@ -14,6 +14,7 @@ public class HUD : MonoBehaviour
     private void Awake()
     {
         expSlider = GetComponent<Slider>();
+        myText = GetComponent<TextMeshProUGUI>();
     }
 
     private void LateUpdate()
@@ -31,8 +32,10 @@ public class HUD : MonoBehaviour
             expSlider.value = currentExp / maxExp;
             break;
             case InfoType.Level:
+            myText.text = string.Format("Lv.{0:F0}", GameManager.instance.level);
             break;
             case InfoType.Kill:
+            myText.text = string.Format("{0:F0}", GameManager.instance.kill);
             break;
             case InfoType.Time:
             break;
