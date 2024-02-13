@@ -8,10 +8,11 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public PoolManager poolManager;
     public Player player;
-    public LevelUp levelUp;
+    public LevelUp uiLevelUp;
     [Header("## Game Control ##")]
     public float gameTime;
     public float maxGameTIme = 2 * 10f;
+    public bool isLive; // 시간 정지
     [Header("## Player Info ##")]
     public int health;
     public int maxHealth = 100;
@@ -29,10 +30,15 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         health = maxHealth;
+
+        // 임시 테스트
+        uiLevelUp.Select(0);
     }
 
     private void Update()
     {
+        if(isLive == false)
+            return;
         gameTime += Time.deltaTime;
         if(gameTime > maxGameTIme)
         {
@@ -44,16 +50,28 @@ public class GameManager : MonoBehaviour
     {
         exp++;
 
-        if(exp == nextExp[level])
+        if(exp == nextExp[Mathf.Min(level, nextExp.Length - 1)])
         {
             level++;
             exp = 0;
-            levelUp.Show();
+            uiLevelUp.Show();
         }
     }
 
     public void KillUp()
     {
         kill++;
+    }
+
+    public void Pause()
+    {
+        isLive = false;
+        Time.timeScale = 0;
+    }
+
+    public void Resume()
+    {
+        isLive = true;
+        Time.timeScale = 1;
     }
 }

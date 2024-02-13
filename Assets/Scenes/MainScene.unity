@@ -12951,15 +12951,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolManager: {fileID: 826020762}
   player: {fileID: 409725492}
-  levelUp: {fileID: 549497316}
+  uiLevelUp: {fileID: 549497316}
   gameTime: 0
   maxGameTIme: 20
+  isLive: 1
   health: 0
   maxHealth: 100
   level: 0
   kill: 0
   exp: 0
-  nextExp: 03000000050000000a0000006400000096000000c80000002c0100009a010000120200009e020000
+  nextExp: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
 --- !u!4 &1109105578
 Transform:
   m_ObjectHideFlags: 0

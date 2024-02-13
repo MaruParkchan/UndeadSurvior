@@ -25,12 +25,16 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.instance.isLive == false)
+            return;
         Vector2 nextVector = inputVector.normalized * moveSpeed * Time.fixedDeltaTime; // FixedDeltaTime은 FixedUpdate(물리 프레임마다)에 써야한다
         playerRigidbody.MovePosition(playerRigidbody.position + nextVector);
     }
 
     private void LateUpdate()
     {
+        if (GameManager.instance.isLive == false)
+            return;
         PlayerFlipReversing();
         AnimationChange();
     }

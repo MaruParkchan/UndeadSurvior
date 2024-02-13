@@ -26,9 +26,12 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.instance.isLive == false)
+            return;
+
         timer += Time.deltaTime;
-        level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / 10f), spawnData.Length -1);
-        if(timer > spawnData[level].spawnTime)
+        level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / 10f), spawnData.Length - 1);
+        if (timer > spawnData[level].spawnTime)
         {
             timer = 0;
             Spawn();
@@ -38,7 +41,7 @@ public class Spawner : MonoBehaviour
     void Spawn()
     {
         GameObject enemy = GameManager.instance.poolManager.Get(0);
-        enemy.transform.position = spawnPoints[Random.Range(1,spawnPoints.Length)].position; 
+        enemy.transform.position = spawnPoints[Random.Range(1, spawnPoints.Length)].position;
         enemy.GetComponent<Enemy>().Init(spawnData[level]);
         // 1부터 시작하는 이유 자기 자신도 0으로 들어가기 때문에 1부터 시작 
     }
