@@ -11,8 +11,11 @@ public class Item : MonoBehaviour
     public Weapon weapon;
     public Gear gear;
 
-    Image icon;
     TextMeshProUGUI textLevel;
+    TextMeshProUGUI textName;
+    TextMeshProUGUI textDesc;
+
+    Image icon;
 
     private void Awake()
     {
@@ -21,13 +24,30 @@ public class Item : MonoBehaviour
 
         TextMeshProUGUI[] texts = GetComponentsInChildren<TextMeshProUGUI>();
         textLevel = texts[0];
+        textName = texts[1];
+        textDesc = texts[2];
+        textName.text = data.itemName;
     }
 
-    private void LateUpdate()
+    private void OnEnable()
     {
         textLevel.text = "Lv." + (level + 1);
-    }
+        switch (data.itemType)
+        {
+            case ItemData.ItemType.Melee:
+            case ItemData.ItemType.Range:
+                textDesc.text = string.Format(data.itemDesc, data.damages[level] * 100, data.counts[level]);
+                break;
+            case ItemData.ItemType.Glove:
+            case ItemData.ItemType.Shoe:
+                textDesc.text = string.Format(data.itemDesc, data.damages[level] * 100); // 백분율로 나오기 때문에 시각적으론 150 250 이런식으로 나와야해서 100 곱함
+                break;
+            default:
+                textDesc.text = string.Format(data.itemDesc);
+                break;
 
+        }
+    }
     public void OnClick()
     {
         switch (data.itemType)
