@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour
     {
         player = GameManager.instance.player;
     }
-    
+
     private void Update()
     {
         switch (id)
@@ -51,6 +51,8 @@ public class Weapon : MonoBehaviour
 
         if (id == 0)
             Batch();
+
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
 
     public void Init(ItemData data)
@@ -64,9 +66,9 @@ public class Weapon : MonoBehaviour
         damage = data.baseDamage;
         count = data.baseCount;
 
-        for(int index = 0; index < GameManager.instance.poolManager.prefabs.Length; index++)
+        for (int index = 0; index < GameManager.instance.poolManager.prefabs.Length; index++)
         {
-            if(data.projectile == GameManager.instance.poolManager.prefabs[index]) // itemData projectile 의 프리팹과 풀 매니저 프리팹과 동일하다면 
+            if (data.projectile == GameManager.instance.poolManager.prefabs[index]) // itemData projectile 의 프리팹과 풀 매니저 프리팹과 동일하다면 
             {
                 prefabId = index;
                 break;
@@ -83,6 +85,10 @@ public class Weapon : MonoBehaviour
                 speed = 0.3f;
                 break;
         }
+
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver); // 플레이어가 가지고 있는 ApplyGear 메소드 다 호출
+        // 레벨했을때 기어 호출
+        // 웨폰이 생성, 웨폰 업글, 기어 자체 생성, 기어 자체 업글 4번 호출해야함
     }
 
     void Batch() // 배치 . 물건을 놓다 

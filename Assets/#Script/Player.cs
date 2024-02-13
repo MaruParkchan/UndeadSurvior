@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5.0f;
+    public float moveSpeed;
     public Vector2 inputVector;
     public Scanner scanner;
     private Rigidbody2D playerRigidbody;

@@ -10861,6 +10861,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 6792a594a3d13ac4bbc8a10eefe39320, type: 2}
   level: 0
   weapon: {fileID: 0}
+  gear: {fileID: 0}
 --- !u!1 &1073689959
 GameObject:
   m_ObjectHideFlags: 0
@@ -20384,6 +20385,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 412b78f7623d39343aa6816804534430, type: 2}
   level: 0
   weapon: {fileID: 0}
+  gear: {fileID: 0}
 --- !u!114 &1470353311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20735,6 +20737,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: b0c01194667ec9d44914bf59265dbceb, type: 2}
   level: 0
   weapon: {fileID: 0}
+  gear: {fileID: 0}
 --- !u!114 &1568414436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21380,6 +21383,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 435c0fb19892cc745a3e841fbb69d24a, type: 2}
   level: 0
   weapon: {fileID: 0}
+  gear: {fileID: 0}
 --- !u!114 &1954253430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21530,6 +21534,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 66efa3bea7150ff40a7a8c0a5a657cdb, type: 2}
   level: 0
   weapon: {fileID: 0}
+  gear: {fileID: 0}
 --- !u!114 &2007730277
 MonoBehaviour:
   m_ObjectHideFlags: 0
