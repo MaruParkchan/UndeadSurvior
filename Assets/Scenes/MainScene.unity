@@ -5124,9 +5124,9 @@ GameObject:
   - component: {fileID: 409725495}
   - component: {fileID: 409725494}
   - component: {fileID: 409725493}
+  - component: {fileID: 409725498}
   - component: {fileID: 409725492}
   - component: {fileID: 409725497}
-  - component: {fileID: 409725498}
   - component: {fileID: 409725499}
   m_Layer: 0
   m_Name: Player
@@ -5150,6 +5150,7 @@ MonoBehaviour:
   moveSpeed: 5
   inputVector: {x: 0, y: 0}
   scanner: {fileID: 0}
+  hands: []
 --- !u!70 &409725493
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5754,7 +5755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &714366445
 Transform:
   m_ObjectHideFlags: 0
@@ -21266,7 +21267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1888287193
 Transform:
   m_ObjectHideFlags: 0

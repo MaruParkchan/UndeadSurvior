@@ -86,6 +86,11 @@ public class Weapon : MonoBehaviour
                 break;
         }
 
+        // Hand Sprite
+        Hand hand = player.hands[(int)data.itemType];
+        hand.spriter.sprite = data.hand;
+        hand.gameObject.SetActive(true);
+
         player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver); // 플레이어가 가지고 있는 ApplyGear 메소드 다 호출
         // 레벨했을때 기어 호출
         // 웨폰이 생성, 웨폰 업글, 기어 자체 생성, 기어 자체 업글 4번 호출해야함

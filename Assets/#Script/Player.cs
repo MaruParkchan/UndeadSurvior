@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     public float moveSpeed;
     public Vector2 inputVector;
     public Scanner scanner;
+    public Hand[] hands;
+
     private Rigidbody2D playerRigidbody;
     private SpriteRenderer playerSpriteRender;
     private Animator playerAnimator;
@@ -18,6 +20,7 @@ public class Player : MonoBehaviour
         playerSpriteRender = GetComponent<SpriteRenderer>();
         playerAnimator = GetComponent<Animator>();
         scanner = GetComponent<Scanner>();
+        hands = GetComponentsInChildren<Hand>(true); // 꺼진 오브젝트도 집어넣음 
     }
 
     private void FixedUpdate()
