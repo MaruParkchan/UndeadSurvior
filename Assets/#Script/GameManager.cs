@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     public PoolManager poolManager;
     public Player player;
     public LevelUp uiLevelUp;
+    public GameObject uiResult;
     [Header("## Game Control ##")]
     public float gameTime;
     public float maxGameTIme = 2 * 10f;
@@ -20,7 +22,6 @@ public class GameManager : MonoBehaviour
     public int kill;
     public int exp;
     public int[] nextExp = { 3, 5, 10, 100, 150, 200, 300, 410, 530, 670 };
-
 
     private void Awake()
     {
@@ -45,6 +46,25 @@ public class GameManager : MonoBehaviour
         {
             gameTime = maxGameTIme;
         }
+    }
+
+    public void GameOver()
+    {
+        StartCoroutine(GameOverCoroutine());
+    }
+
+    IEnumerator GameOverCoroutine()
+    {
+        isLive = false;
+        yield return new WaitForSeconds(0.5f);
+        Pause();
+        uiResult.SetActive(true);
+
+    }
+
+    public void GameRetry()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void GetExp()
