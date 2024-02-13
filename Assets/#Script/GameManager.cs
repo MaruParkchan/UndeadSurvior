@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     public PoolManager poolManager;
     public Player player;
     public LevelUp uiLevelUp;
-    public GameObject uiResult;
+    public Result uiResult;
+    public GameObject enemyCleaner;
     [Header("## Game Control ##")]
     public float gameTime;
     public float maxGameTIme = 2 * 10f;
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
         // 임시 테스트
         uiLevelUp.Select(0);
         isLive = true;
+        Time.timeScale = 1;
     }
 
     private void Update()
@@ -45,6 +47,7 @@ public class GameManager : MonoBehaviour
         if (gameTime > maxGameTIme)
         {
             gameTime = maxGameTIme;
+            GameVictroy();
         }
     }
 
@@ -57,8 +60,25 @@ public class GameManager : MonoBehaviour
     {
         isLive = false;
         yield return new WaitForSeconds(0.5f);
+        uiResult.gameObject.SetActive(true);
         Pause();
-        uiResult.SetActive(true);
+        uiResult.Lose();
+
+    }
+
+    public void GameVictroy()
+    {
+        StartCoroutine(GameVictroyCoroutine());
+    }
+
+    IEnumerator GameVictroyCoroutine()
+    {
+        isLive = false;
+        enemyCleaner.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        uiResult.gameObject.SetActive(true);
+        Pause();
+        uiResult.Win();
 
     }
 
@@ -69,6 +89,9 @@ public class GameManager : MonoBehaviour
 
     public void GetExp()
     {
+        if (!isLive)
+            return;
+
         exp++;
 
         if (exp == nextExp[Mathf.Min(level, nextExp.Length - 1)])

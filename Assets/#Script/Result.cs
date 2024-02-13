@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Result : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject[] titles;
+
+    public void Lose()
     {
-        
+        titles[0].SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Win()
     {
-        
+        titles[1].SetActive(true);
     }
 }
