@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
     public float maxGameTIme = 2 * 10f;
     public bool isLive; // 시간 정지
     [Header("## Player Info ##")]
-    public int health;
-    public int maxHealth = 100;
+    public float health;
+    public float maxHealth = 100;
     public int level;
     public int kill;
     public int exp;

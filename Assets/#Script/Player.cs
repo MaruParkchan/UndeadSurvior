@@ -56,4 +56,22 @@ public class Player : MonoBehaviour
     {
         inputVector = value.Get<Vector2>();
     }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if(!GameManager.instance.isLive)
+        return;
+
+        GameManager.instance.health -= Time.deltaTime * 10;
+
+        if(GameManager.instance.health <= 0)
+        {
+            for(int i = 2; i < transform.childCount; i++) // Area까지는 살리기 위해 i = 2
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
+            }
+            
+            playerAnimator.SetTrigger("Dead");
+        }
+    }
 }
