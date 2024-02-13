@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public PoolManager poolManager;
     public Player player;
+    public LevelUp levelUp;
     [Header("## Game Control ##")]
     public float gameTime;
     public float maxGameTIme = 2 * 10f;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
         {
             level++;
             exp = 0;
+            levelUp.Show();
         }
     }
 
