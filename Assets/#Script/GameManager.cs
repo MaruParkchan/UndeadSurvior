@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public int level;
     public int kill;
     public int exp;
-    public int[] nextExp = { 3, 5, 10, 100, 150, 200, 300, 410, 530, 670} ;
+    public int[] nextExp = { 3, 5, 10, 100, 150, 200, 300, 410, 530, 670 };
 
 
     private void Awake()
@@ -27,20 +27,21 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
+    public void GameStart()
     {
         health = maxHealth;
 
         // 임시 테스트
         uiLevelUp.Select(0);
+        isLive = true;
     }
 
     private void Update()
     {
-        if(isLive == false)
+        if (isLive == false)
             return;
         gameTime += Time.deltaTime;
-        if(gameTime > maxGameTIme)
+        if (gameTime > maxGameTIme)
         {
             gameTime = maxGameTIme;
         }
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviour
     {
         exp++;
 
-        if(exp == nextExp[Mathf.Min(level, nextExp.Length - 1)])
+        if (exp == nextExp[Mathf.Min(level, nextExp.Length - 1)])
         {
             level++;
             exp = 0;
