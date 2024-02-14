@@ -26,14 +26,14 @@ public class Gear : MonoBehaviour
 
     void ApplyGear()
     {
-        switch(type)
+        switch (type)
         {
             case ItemData.ItemType.Glove:
-            RateUp();
-            break;
+                RateUp();
+                break;
             case ItemData.ItemType.Shoe:
-            SpeedUp();
-            break;
+                SpeedUp();
+                break;
         }
     }
 
@@ -45,9 +45,11 @@ public class Gear : MonoBehaviour
             switch (weapon.id)
             {
                 case 0:
+                    float speed = 150 * Character.WeaponSpeed;
                     weapon.speed = 150 + (150 * rate); // 근거리 무기
                     break;
                 default:
+                    speed = 0.5f * Character.WeaponRate;
                     weapon.speed = 0.5f * (1f - rate); // 원거리 무기 속도 
                     break;
             }
