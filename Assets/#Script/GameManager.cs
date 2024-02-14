@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
         Resume();
 
         AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        AudioManager.instance.PlayBgm(true);
     }
 
     private void Update()
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
         Pause();
         uiResult.Lose();
         AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
-
+        AudioManager.instance.PlayBgm(false);
     }
 
     public void GameVictroy()
@@ -87,6 +88,7 @@ public class GameManager : MonoBehaviour
         Pause();
         uiResult.Win();
         AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
+        AudioManager.instance.PlayBgm(false);
 
     }
 
