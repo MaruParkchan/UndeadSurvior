@@ -18,6 +18,8 @@ public class AudioManager : MonoBehaviour
     AudioSource[] sfxPlayers;
     int channelIndex;
 
+    public enum Sfx { Dead, Hit, LevelUp = 3, Lose, Melee, Range = 7, Select, Win }
+
     private void Awake()
     {
         instance = this;
@@ -41,13 +43,35 @@ public class AudioManager : MonoBehaviour
         bgmObject.transform.parent = transform;
         sfxPlayers = new AudioSource[channels];
 
-        for(int i = 0; i < sfxPlayers.Length; i++)
+        for (int i = 0; i < sfxPlayers.Length; i++)
         {
             sfxPlayers[i] = sfxObject.AddComponent<AudioSource>();
             sfxPlayers[i].playOnAwake = false;
             sfxPlayers[i].volume = sfxVolume;
         }
 
+    }
+
+    public void PlaySfx(Sfx sfx)
+    {
+        for (int i = 0; i < sfxPlayers.Length; i++)
+        {
+            int loopIndex = (i + channelIndex) % sfxPlayers.Length;
+
+            if (sfxPlayers[loopIndex].isPlaying)
+                continue;
+
+            int randomIndex = 0;
+            if(sfx == Sfx.Hit || sfx == Sfx.Melee)
+            {
+                randomIndex = Random.Range(0,2);
+            }
+
+            channelIndex = loopIndex;
+            sfxPlayers[loopIndex].clip = sfxClips[(int)sfx + randomIndex];
+            sfxPlayers[loopIndex].Play();
+            break;
+        }
     }
 
 

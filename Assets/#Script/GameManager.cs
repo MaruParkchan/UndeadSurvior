@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
 
         isLive = true;
         Resume();
+
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
     }
 
     private void Update()
@@ -67,6 +69,7 @@ public class GameManager : MonoBehaviour
         uiResult.gameObject.SetActive(true);
         Pause();
         uiResult.Lose();
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
 
     }
 
@@ -83,6 +86,7 @@ public class GameManager : MonoBehaviour
         uiResult.gameObject.SetActive(true);
         Pause();
         uiResult.Win();
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
 
     }
 

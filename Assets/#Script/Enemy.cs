@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     {
         if (GameManager.instance.isLive == false)
             return;
-            
+
         if (!isLive || enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
             return;
 
@@ -82,6 +82,7 @@ public class Enemy : MonoBehaviour
         if (health > 0)
         {
             enemyAnimator.SetTrigger("Hit");
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
         }
         else
         {
@@ -92,6 +93,9 @@ public class Enemy : MonoBehaviour
             enemyAnimator.SetBool("Dead", true);
             GameManager.instance.KillUp();
             GameManager.instance.GetExp();
+            
+            if (GameManager.instance.isLive == true)
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
         }
     }
 
