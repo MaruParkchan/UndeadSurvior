@@ -7,13 +7,17 @@ public class AchiveManager : MonoBehaviour
 {
     public GameObject[] lockCharacter;
     public GameObject[] unlockCharacter;
+    public GameObject uiNotice;
 
     enum Achive { UnlockPotato, UnlockBean }
     Achive[] achives;
 
+    WaitForSecondsRealtime wait;
+
     private void Awake()
     {
         achives = (Achive[])Enum.GetValues(typeof(Achive));
+        wait = new WaitForSecondsRealtime(5);
         if (!PlayerPrefs.HasKey("MyData"))
         {
             Init();
@@ -36,19 +40,27 @@ public class AchiveManager : MonoBehaviour
     void CheckAchive(Achive achive)
     {
         bool isAchive = false;
-        switch(achive)
+        switch (achive)
         {
             case Achive.UnlockPotato:
-            isAchive = GameManager.instance.kill >= 10;
-            break;
+                isAchive = GameManager.instance.kill >= 10;
+                break;
             case Achive.UnlockBean:
-            isAchive = GameManager.instance.gameTime == GameManager.instance.maxGameTIme;
-            break;
+                isAchive = GameManager.instance.gameTime == GameManager.instance.maxGameTIme;
+                break;
         }
 
-        if(isAchive && PlayerPrefs.GetInt(achive.ToString()) == 0)
+        if (isAchive && PlayerPrefs.GetInt(achive.ToString()) == 0)
         {
-            PlayerPrefs.SetInt(achive.ToString(), 1);// 해금했으니 데이터 1 집어넣기 
+            PlayerPrefs.SetInt(achive.ToString(), 1);// 해금했으니 데이터 1 집어넣기
+            for (int i = 0; i < uiNotice.transform.childCount; i++)
+            {
+                bool isActive = i == (int)achive;
+                uiNotice.transform.GetChild(i).gameObject.SetActive(isActive);
+            }
+
+            StartCoroutine(NoticeCoroutine());
+
         }
     }
     void Init()
@@ -70,5 +82,12 @@ public class AchiveManager : MonoBehaviour
             lockCharacter[i].SetActive(!isUnlock);
             unlockCharacter[i].SetActive(isUnlock);
         }
+    }
+
+    IEnumerator NoticeCoroutine()
+    {
+        uiNotice.SetActive(true);
+        yield return wait;
+        uiNotice.SetActive(false);
     }
 }
