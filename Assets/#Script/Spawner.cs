@@ -15,6 +15,7 @@ public class Spawner : MonoBehaviour
 {
     public Transform[] spawnPoints;
     public SpawnData[] spawnData;
+    public float levelTime;
 
     float timer;
     [SerializeField] int level;
@@ -22,6 +23,7 @@ public class Spawner : MonoBehaviour
     private void Awake()
     {
         spawnPoints = GetComponentsInChildren<Transform>();
+        levelTime = GameManager.instance.maxGameTIme / spawnData.Length;
     }
 
     private void Update()
