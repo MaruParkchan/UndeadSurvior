@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public Vector2 inputVector;
     public Scanner scanner;
     public Hand[] hands;
+    public RuntimeAnimatorController[] animatorsCon;
 
     private Rigidbody2D playerRigidbody;
     private SpriteRenderer playerSpriteRender;
@@ -21,6 +22,11 @@ public class Player : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         scanner = GetComponent<Scanner>();
         hands = GetComponentsInChildren<Hand>(true); // 꺼진 오브젝트도 집어넣음 
+    }
+    
+    private void OnEnable()
+    {
+        playerAnimator.runtimeAnimatorController = animatorsCon[GameManager.instance.playerId];
     }
 
     private void FixedUpdate()
